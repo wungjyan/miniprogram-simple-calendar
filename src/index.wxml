@@ -1,0 +1,41 @@
+<wxs module="m1">
+    var getCurrentTime = function(d){
+        var str = d.year + '/' + (d.month+1) + '/' + d.date
+        return getDate(str).getTime()
+    }
+    module.exports.getTime = getCurrentTime
+</wxs>
+<view class="wx-calendar-wrapper">
+    <!-- 头部 -->
+    <view class="calendar-header">
+        <view class="icon-group">
+            <text class="iconfont icon-doubleleft" bindtap="reduceYear"></text>
+            <text class="iconfont icon-left" bindtap="reduceMonth"></text>
+        </view>
+        <view class="show-date">{{year}}年{{month+1}}月</view>
+        <view class="icon-group">
+            <text class="iconfont icon-right" bindtap="addMonth"></text>
+            <text class="iconfont icon-doubleright" bindtap="addYear"></text>
+        </view>
+    </view>
+    <!-- 主体 -->
+    <view class="calendar-body">
+        <view class="weeks-box">
+            <block wx:if="{{en}}">
+                <text wx:for="{{weeks_en}}" wx:key="index">{{item}}</text>
+            </block>
+            <block wx:else>
+                <text wx:for="{{weeks}}" wx:key="index">{{item}}</text>
+            </block>
+        </view>
+        <view class="date-box">
+            <view class="line" wx:for="{{datesList}}" wx:key="index">
+                <view wx:for="{{item}}" wx:for-index="idx" wx:for-item="innerItem" wx:key="idx">
+                    <view class="innerItem {{innerItem.m!=='cur'?'no-cur':''}} {{todayTimestamp===m1.getTime(innerItem)?'today':''}} {{selectedTimestamp===m1.getTime(innerItem)?'selected':''}}" data-obj="{{innerItem}}" bindtap="selectDate">
+                        {{showOther?innerItem.date:(innerItem.m==='cur'?innerItem.date:'')}}
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
