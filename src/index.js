@@ -11,6 +11,10 @@ Component({
     list: {
       type: Array,
       value: []
+    },
+    changeYear: {
+      type: Boolean,
+      value: true
     }
   },
   data: {

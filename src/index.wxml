@@ -9,13 +9,13 @@
     <!-- 头部 -->
     <view class="calendar-header">
         <view class="icon-group">
-            <text class="iconfont icon-doubleleft" bindtap="reduceYear"></text>
+            <text wx:if="{{changeYear}}" class="iconfont icon-doubleleft" bindtap="reduceYear"></text>
             <text class="iconfont icon-left" bindtap="reduceMonth"></text>
         </view>
         <view class="show-date">{{year}}年{{month+1}}月</view>
         <view class="icon-group">
             <text class="iconfont icon-right" bindtap="addMonth"></text>
-            <text class="iconfont icon-doubleright" bindtap="addYear"></text>
+            <text wx:if="{{changeYear}}" class="iconfont icon-doubleright" bindtap="addYear"></text>
         </view>
     </view>
     <!-- 主体 -->
