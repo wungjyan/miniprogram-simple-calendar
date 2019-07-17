@@ -12,7 +12,7 @@ Component({
       type: Array,
       value: []
     },
-    changeYear: {
+    showChangeYear: {
       type: Boolean,
       value: true
     }
