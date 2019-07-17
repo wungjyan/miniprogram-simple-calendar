@@ -25,6 +25,9 @@ Page({
     })
     console.log(e)
   },
+  change(e) {
+    console.log(e)
+  },
   switchLan() {
     this.setData({
       en: !this.data.en

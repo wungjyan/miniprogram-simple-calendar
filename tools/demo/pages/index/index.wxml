@@ -1,4 +1,4 @@
-<comp bindselect="select" en="{{en}}" list="{{list}}" show-other="{{showOther}}"></comp>
+<comp bindselect="select" bindchange="change" en="{{en}}" list="{{list}}" show-other="{{showOther}}"></comp>
 <view class="box" wx:if="{{year}}">
     选中的日期：
     <text>{{year}}</text>

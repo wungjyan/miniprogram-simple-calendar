@@ -61,9 +61,6 @@ Component({
     }
   },
   methods: {
-    log() {
-      console.log(this.data.datesList)
-    },
     /**
      * 获取当月的信息（返回当月第一天和最后一天的星期，以及当月总天数）
      * @param {*} year 年份
@@ -145,6 +142,14 @@ Component({
         year,
         datesArr: this.getAllDates(year, this.data.month)
       })
+      this.triggerEvent(
+        'change',
+        {
+          year,
+          month: this.data.month + 1
+        },
+        {}
+      )
     },
     /**
      * 减月份
@@ -159,11 +164,27 @@ Component({
           month: 11,
           datesArr: this.getAllDates(year, 11)
         })
+        this.triggerEvent(
+          'change',
+          {
+            year,
+            month: 12 // 这里返回已+1
+          },
+          {}
+        )
       } else {
         this.setData({
           month,
           datesArr: this.getAllDates(this.data.year, month)
         })
+        this.triggerEvent(
+          'change',
+          {
+            year: this.data.year,
+            month: month + 1
+          },
+          {}
+        )
       }
     },
     /**
@@ -175,6 +196,14 @@ Component({
         year,
         datesArr: this.getAllDates(year, this.data.month)
       })
+      this.triggerEvent(
+        'change',
+        {
+          year,
+          month: this.data.month + 1
+        },
+        {}
+      )
     },
     /**
      * 加月份
@@ -189,11 +218,27 @@ Component({
           month: 0,
           datesArr: this.getAllDates(year, 0)
         })
+        this.triggerEvent(
+          'change',
+          {
+            year,
+            month: 1 // 已+1
+          },
+          {}
+        )
       } else {
         this.setData({
           month,
           datesArr: this.getAllDates(this.data.year, month)
         })
+        this.triggerEvent(
+          'change',
+          {
+            year: this.data.year,
+            month: month + 1
+          },
+          {}
+        )
       }
     },
     /**

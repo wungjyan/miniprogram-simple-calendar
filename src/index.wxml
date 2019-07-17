@@ -37,6 +37,5 @@
                 </view>
             </view>
         </view>
-        <!-- <view bindtap="log">log数据</view> -->
     </view>
 </view>
