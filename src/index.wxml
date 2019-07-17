@@ -1,9 +1,11 @@
 <wxs module="m1">
     var getCurrentTime = function(d){
-        var str = d.year + '/' + (d.month+1) + '/' + d.date
+        var str = d.year + '/' + (d.month+1) + '/' + d.day
         return getDate(str).getTime()
     }
-    module.exports.getTime = getCurrentTime
+     module.exports={
+         getTime:getCurrentTime
+     }
 </wxs>
 <view class="wx-calendar-wrapper">
     <!-- 头部 -->
@@ -31,8 +33,8 @@
         <view class="date-box">
             <view class="line" wx:for="{{datesList}}" wx:key="index">
                 <view wx:for="{{item}}" wx:for-index="idx" wx:for-item="innerItem" wx:key="idx">
-                    <view class="innerItem {{innerItem.m!=='cur'?'no-cur':''}} {{todayTimestamp===m1.getTime(innerItem)?'today':''}} {{selectedTimestamp===m1.getTime(innerItem)?'selected':''}} {{innerItem.m==='cur'&&jsonList[innerItem.date]?'had':''}}" data-list="{{jsonList[innerItem.date] || []}}" data-obj="{{innerItem}}" bindtap="selectDate">
-                        {{showOther?innerItem.date:(innerItem.m==='cur'?innerItem.date:'')}}
+                    <view class="innerItem {{innerItem.m!=='cur'?'no-cur':''}} {{todayTimestamp===m1.getTime(innerItem)?'today':''}} {{selectedTimestamp===m1.getTime(innerItem)?'selected':''}} {{innerItem.m==='cur'&&jsonList[innerItem.date]?'had':''}}" data-list="{{jsonList[innerItem.date]||[]}}" data-obj="{{innerItem}}" bindtap="selectDate">
+                        {{showOther?innerItem.day:(innerItem.m==='cur'?innerItem.day:'')}}
                     </view>
                 </view>
             </view>

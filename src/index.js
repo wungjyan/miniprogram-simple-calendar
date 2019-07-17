@@ -48,9 +48,9 @@ Component({
     },
     list(newVal) {
       if (newVal.length) {
-        const arr = this.groupBy(newVal, item => [item.day])
+        const arr = this.groupBy(newVal, item => [this.formatDate(item.day)])
         const newArr = arr.map(item => {
-          const key = parseInt(item[0].day.split('-')[2], 10)
+          const key = this.formatDate(item[0].day)
           return {[key]: item}
         })
         const obj = {}
@@ -95,7 +95,8 @@ Component({
         datesArr.push({
           year,
           month,
-          date: i + 1,
+          day: i + 1,
+          date: `${year}-${month + 1}-${i + 1}`,
           m: 'cur'
         })
       }
@@ -105,14 +106,16 @@ Component({
           datesArr.unshift({
             year: year - 1,
             month: 11,
-            date: prevMonthInfo.days - i,
+            day: prevMonthInfo.days - i,
+            date: `${year - 1}-12-${prevMonthInfo.days - i}`,
             m: 'prev'
           })
         } else {
           datesArr.unshift({
             year,
             month: month - 1,
-            date: prevMonthInfo.days - i,
+            day: prevMonthInfo.days - i,
+            date: `${year}-${month}-${prevMonthInfo.days - i}`,
             m: 'prev'
           })
         }
@@ -123,14 +126,16 @@ Component({
           datesArr.push({
             year: year + 1,
             month: 0,
-            date: i + 1,
+            day: i + 1,
+            date: `${year + 1}-1-${i + 1}`,
             m: 'next'
           })
         } else {
           datesArr.push({
             year,
             month: month + 1,
-            date: i + 1,
+            day: i + 1,
+            date: `${year}-${month + 2}-${i + 1}`,
             m: 'next'
           })
         }
@@ -250,7 +255,7 @@ Component({
      * @param {*} d 每一天的信息
      */
     getCurrentTime(d) {
-      return new Date(d.year, d.month, d.date).getTime()
+      return new Date(d.year, d.month, d.day).getTime()
     },
     /**
      * 计算今天的时间戳
@@ -260,7 +265,7 @@ Component({
       const d = {
         year: today.getFullYear(),
         month: today.getMonth(),
-        date: today.getDate()
+        day: today.getDate()
       }
       return this.getCurrentTime(d)
     },
@@ -286,6 +291,16 @@ Component({
       })
       return Object.keys(groups).map(group => groups[group])
     },
+    /**
+     * 统一日期格式
+     * @param {*} e
+     */
+    formatDate(s) {
+      const arr = s.split('-')
+      const m = parseInt(arr[1], 10)
+      const d = parseInt(arr[2], 10)
+      return `${arr[0]}-${m}-${d}`
+    },
     // 选中日期
     selectDate(e) {
       const list = e.currentTarget.dataset.list
@@ -301,7 +316,8 @@ Component({
       const date = {
         year: item.year,
         month: item.month + 1,
-        day: item.date,
+        day: item.day,
+        date: item.date,
         list
       }
       this.triggerEvent('select', date, {})
