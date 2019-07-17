@@ -15,7 +15,8 @@ Page({
       {
         day: '2019-07-19'
       }
-    ]
+    ],
+    changeYear: true
   },
   select(e) {
     this.setData({
@@ -36,6 +37,11 @@ Page({
   switchShow() {
     this.setData({
       showOther: !this.data.showOther
+    })
+  },
+  showChangeYear() {
+    this.setData({
+      changeYear: !this.data.changeYear
     })
   }
 })

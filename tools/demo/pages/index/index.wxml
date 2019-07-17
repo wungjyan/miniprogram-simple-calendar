@@ -1,4 +1,4 @@
-<comp bindselect="select" bindchange="change" en="{{en}}" list="{{list}}" show-other="{{showOther}}"></comp>
+<comp bindselect="select" bindchange="change" en="{{en}}" list="{{list}}" show-change-year="{{changeYear}}" show-other="{{showOther}}"></comp>
 <view class="box" wx:if="{{year}}">
     选中的日期：
     <text>{{year}}</text>
@@ -10,3 +10,4 @@
 </view>
 <view class="box" bindtap="switchLan">切换中英文</view>
 <view class="box" bindtap="switchShow">是否显示上月和下月日期</view>
+<view class="box" bindtap="showChangeYear">开启/关闭年份切换</view>
