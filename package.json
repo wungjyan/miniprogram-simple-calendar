@@ -1,6 +1,6 @@
 {
   "name": "miniprogram-simple-calendar",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "适用于微信小程序的日历组件",
   "main": "miniprogram_dist/index.js",
   "scripts": {
