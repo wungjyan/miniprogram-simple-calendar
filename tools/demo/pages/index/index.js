@@ -13,6 +13,15 @@ Page({
         day: '2019-7-18'
       },
       {
+        day: '2019-7-18'
+      },
+      {
+        day: '2019-08-8'
+      },
+      {
+        day: '2019-8-08'
+      },
+      {
         day: '2019-07-19'
       }
     ],
@@ -24,7 +33,7 @@ Page({
       month: e.detail.month,
       day: e.detail.day
     })
-    console.log(e)
+    console.log(e.detail)
   },
   change(e) {
     console.log(e)
