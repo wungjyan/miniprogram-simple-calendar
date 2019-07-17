@@ -7,6 +7,10 @@ Component({
     showOther: {
       type: Boolean,
       value: true
+    },
+    list: {
+      type: Array,
+      value: []
     }
   },
   data: {
@@ -17,7 +21,8 @@ Component({
     datesList: [], // 分组好的列表，渲染到页面
     selectedTimestamp: 0,
     weeks: ['日', '一', '二', '三', '四', '五', '六'],
-    weeks_en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+    weeks_en: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+    jsonList: {}
   },
   lifetimes: {
     attached() {
@@ -36,9 +41,29 @@ Component({
       this.setData({
         datesList: this.chunk(o, 7)
       })
+    },
+    list(newVal) {
+      if (newVal.length) {
+        const arr = this.groupBy(newVal, item => [item.day])
+        const newArr = arr.map(item => {
+          const key = parseInt(item[0].day.split('-')[2], 10)
+          return {[key]: item}
+        })
+        const obj = {}
+        newArr.forEach(o => {
+          const key = Object.keys(o)[0]
+          obj[key] = o[key]
+        })
+        this.setData({
+          jsonList: obj
+        })
+      }
     }
   },
   methods: {
+    log() {
+      console.log(this.data.datesList)
+    },
     /**
      * 获取当月的信息（返回当月第一天和最后一天的星期，以及当月总天数）
      * @param {*} year 年份
@@ -198,8 +223,23 @@ Component({
     chunk(arr, size) {
       return Array.from({length: Math.ceil(arr.length / size)}, (v, i) => arr.slice(i * size, i * size + size))
     },
+    /**
+     *  分组
+     * @param {*} arr 目标数组
+     * @param {*} fn 函数
+     */
+    groupBy(arr, fn) {
+      const groups = {}
+      arr.forEach(function (o) {
+        const group = JSON.stringify(fn(o))
+        groups[group] = groups[group] || []
+        groups[group].push(o)
+      })
+      return Object.keys(groups).map(group => groups[group])
+    },
     // 选中日期
     selectDate(e) {
+      const list = e.currentTarget.dataset.list
       const item = e.currentTarget.dataset.obj
       if (item.m === 'prev') {
         this.reduceMonth()
@@ -212,7 +252,8 @@ Component({
       const date = {
         year: item.year,
         month: item.month + 1,
-        day: item.date
+        day: item.date,
+        list
       }
       this.triggerEvent('select', date, {})
     }

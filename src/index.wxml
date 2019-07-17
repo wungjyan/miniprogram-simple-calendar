@@ -31,11 +31,12 @@
         <view class="date-box">
             <view class="line" wx:for="{{datesList}}" wx:key="index">
                 <view wx:for="{{item}}" wx:for-index="idx" wx:for-item="innerItem" wx:key="idx">
-                    <view class="innerItem {{innerItem.m!=='cur'?'no-cur':''}} {{todayTimestamp===m1.getTime(innerItem)?'today':''}} {{selectedTimestamp===m1.getTime(innerItem)?'selected':''}}" data-obj="{{innerItem}}" bindtap="selectDate">
+                    <view class="innerItem {{innerItem.m!=='cur'?'no-cur':''}} {{todayTimestamp===m1.getTime(innerItem)?'today':''}} {{selectedTimestamp===m1.getTime(innerItem)?'selected':''}} {{innerItem.m==='cur'&&jsonList[innerItem.date]?'had':''}}" data-list="{{jsonList[innerItem.date] || []}}" data-obj="{{innerItem}}" bindtap="selectDate">
                         {{showOther?innerItem.date:(innerItem.m==='cur'?innerItem.date:'')}}
                     </view>
                 </view>
             </view>
         </view>
+        <!-- <view bindtap="log">log数据</view> -->
     </view>
 </view>

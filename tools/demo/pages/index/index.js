@@ -4,7 +4,18 @@ Page({
     month: '',
     day: '',
     showOther: true,
-    en: false
+    en: false,
+    list: [
+      {
+        day: '2019-7-17'
+      },
+      {
+        day: '2019-7-18'
+      },
+      {
+        day: '2019-07-19'
+      }
+    ]
   },
   select(e) {
     this.setData({
@@ -12,6 +23,7 @@ Page({
       month: e.detail.month,
       day: e.detail.day
     })
+    console.log(e)
   },
   switchLan() {
     this.setData({
