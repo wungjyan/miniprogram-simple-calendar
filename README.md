@@ -60,4 +60,4 @@ npm install --save miniprogram-simple-calendar
 
 ## 计划
 
-- 考虑加入收缩模式（横滚）
+- 考虑加入收缩模式
