@@ -58,6 +58,3 @@ npm install --save miniprogram-simple-calendar
 | select | 选中日期时触发   |
 | change | 切换年或月时触发 |
 
-## 计划
-
-- 考虑加入收缩模式
